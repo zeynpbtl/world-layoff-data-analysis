@@ -36,6 +36,9 @@ Aşağıdaki bulgular, temizlenmiş veri üzerinde çalıştırılan sorgulardan
 - **Sektör bazında:** Consumer (~46.700), Retail (~43.600) ve "Other" (~36.300) en çok etkilenen kategoriler; saf teknoloji şirketleri tek bir kategoride toplanmadığı için dağılım farklı sektörlere yayılmış görünüyor.
 - **Şirket aşamasına göre:** Halka arz sonrası (Post-IPO) şirketler toplam işten çıkarmaların en büyük kısmını (~205.000) oluşturuyor — büyük, halka açık teknoloji şirketlerinin bu dönemde en çok kesinti yapan grup olduğunu doğruluyor.
 - **%100 işten çıkarma (şirket kapanışı):** En çok fon toplamış olup tamamen kapanan şirketler arasında Britishvolt (2,4 milyar $) ve Quibi (1,8 milyar $) dikkat çekiyor — yüksek fonlamanın tek başına ayakta kalmayı garanti etmediğini gösteren çarpıcı örnekler.
+- * **Finansman Hacmi vs. Küçülme Oranı (Ters Orantı):** Alınan yatırım büyüklüğü ile işten çıkarma yüzdesi arasında güçlü bir ters orantı bulundu. 50 milyon doların altında fon toplayan erken aşama şirketler ortalama **%41,4** oranında küçülürken, 500 milyon dolar üzeri mega şirketlerde bu oran ortalama **%16,7** seviyesinde kaldı.
+* **Mutlak Hacim vs. Oransal Kayıp:** 500 milyon dolar üzeri fon toplayan dev şirketler oransal olarak (%16,7) en düşük kayba uğrasa da, olay başına ortalama **~503 kişi** ile piyasaya mutlak sayı olarak en çok iş gücü salan grup oldu.
+* **Kriz Öncesi Tahmini Şirket Büyüklükleri:** İşten çıkarılan kişi sayısı ve yüzde oranı üzerinden yapılan tersine mühendislikle (`total_laid_off / percentage_laid_off`), Big Tech şirketlerinin (Amazon, Google, Microsoft) binlerce çalışanı işten çıkarmalarına rağmen kadrolarının yalnızca **%2 ila %6'lık** küçük bir dilimini kestiği doğrulandı.
 
 ## Kullanılan SQL Teknikleri
 
@@ -44,6 +47,8 @@ Aşağıdaki bulgular, temizlenmiş veri üzerinde çalıştırılan sorgulardan
 - Self-join ile eksik veri doldurma
 - Kümülatif toplam (rolling total) hesaplama: `SUM(...) OVER(ORDER BY ...)`
 - Tarih/string fonksiyonları: `STR_TO_DATE`, `SUBSTRING`, `TRIM`
+- Veri Segmentasyonu (Binning): Sürekli sayısal verileri (`funds_raised_millions`) analiz edilebilir kategorik aralıklara bölmek için `CASE WHEN` kullanımı.
+- Türetilmiş Metrik Hesabı & Yuvarlama: Oransal verilerden kriz öncesi tahmini şirket büyüklüğünü modellemek için matematiksel operatörler ve `ROUND()` fonksiyonu.
 
 ## Geliştirme Fikirleri (Sonraki Adımlar)
 
