@@ -52,11 +52,10 @@ Aşağıdaki bulgular, temizlenmiş veri üzerinde çalıştırılan sorgulardan
 
 ## Geliştirme Fikirleri (Sonraki Adımlar)
 
-- `percentage_laid_off` kolonunu `TEXT` yerine `DECIMAL` olarak tutmak
-- Finansman miktarı (`funds_raised_millions`) ile işten çıkarma oranı arasındaki ilişkiyi inceleyen bir korelasyon analizi eklemek
-- Bulguları Python (matplotlib/seaborn) veya Tableau ile görselleştirmek
-- Silinen (tamamen boş) satırları ayrı bir "duyuru yapıldı ama sayı belirtilmedi" analizi için saklamak
-
+- [x] Finansman miktarı (`funds_raised_millions`) ile işten çıkarma oranı arasındaki ilişkiyi inceleyen korelasyon/segmentasyon analizi eklemek *(Tamamlandı)*
+- [ ] Bulguları Python (Matplotlib/Seaborn) veya Tableau / Power BI ile görselleştirerek interaktif bir dashboard oluşturmak
+- [ ] Silinen (her iki metrik de boş olan) satırları "şeffaflık/duyuru analizi" için ayrı bir tabloda incelemek
+- [ ] `percentage_laid_off` kolonunu doğrudan `DECIMAL` tipinde modelleyerek veri tiplerini optimize etmek
 ## Nasıl Çalıştırılır
 
 1. `layoffs.csv` dosyasını MySQL'e `layoffs` tablosu olarak import edin.
