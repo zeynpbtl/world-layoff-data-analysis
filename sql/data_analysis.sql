@@ -97,3 +97,27 @@ FROM Company_Year_Rank
 WHERE Ranking <= 5;
 
 
+SELECT company, location, total_laid_off, percentage_laid_off,
+ROUND(total_laid_off / percentage_laid_off, 0) AS estimated_headcount_before_layoffs
+FROM layoffs_staging2
+WHERE total_laid_off IS NOT NULL
+AND percentage_laid_off IS NOT NULL
+AND percentage_laid_off > 0
+ORDER BY estimated_headcount_before_layoffs DESC
+;
+
+SELECT 
+    CASE 
+        WHEN funds_raised_millions < 50 THEN '1. Düşük (<50M)'
+        WHEN funds_raised_millions BETWEEN 50 AND 200 THEN '2. Orta (50M-200M)'
+        WHEN funds_raised_millions BETWEEN 200 AND 500 THEN '3. Yüksek (200M-500M)'
+        ELSE '4. Çok Yüksek (500M+)' 
+    END AS funding_bucket,
+    COUNT(*) AS company_count,
+    ROUND(AVG(percentage_laid_off), 4) AS avg_percentage_laid_off,
+    ROUND(AVG(total_laid_off), 2) AS avg_total_laid_off
+FROM layoffs_staging2
+WHERE funds_raised_millions IS NOT NULL 
+  AND percentage_laid_off IS NOT NULL
+GROUP BY funding_bucket
+ORDER BY funding_bucket;
